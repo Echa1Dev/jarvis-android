@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="#0a0a0a">
+
+    <TextView
+        android:text="JARVIS"
+        android:textColor="#e0e0e0"
+        android:textSize="32sp"
+        android:letterSpacing="0.2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/statusText"
+        android:text="Toca Activar para empezar"
+        android:textColor="#666666"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"/>
+
+    <Button
+        android:id="@+id/btnStart"
+        android:text="Activar"
+        android:layout_width="200dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#1a1a1a"
+        android:textColor="#e0e0e0"/>
+
+    <Button
+        android:id="@+id/btnStop"
+        android:text="Detener"
+        android:layout_width="200dp"
+        android:layout_height="56dp"
+        android:backgroundTint="#1a1a1a"
+        android:textColor="#666666"/>
+
+</LinearLayout>
