@@ -17,30 +17,33 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Download Gradle wrapper jar
+        run: |
+          GRADLE_VERSION=8.6
+          mkdir -p gradle/wrapper
+          curl -fL "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" -o /tmp/gradle.zip
+          unzip -p /tmp/gradle.zip "gradle-${GRADLE_VERSION}/lib/gradle-wrapper.jar" > gradle/wrapper/gradle-wrapper.jar
+          chmod +x gradlew
+
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
       - name: Build debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
 
-      - name: Upload APK
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: jarvis-debug
           path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 90
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
+      - name: Create or update Release
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          name: Jarvis Android
+          name: "Jarvis Android — ultima version"
           files: app/build/outputs/apk/debug/app-debug.apk
-          prerelease: false
+          make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
